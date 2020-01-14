@@ -5,4 +5,8 @@
 #ifndef PROBLEMSOLVER_SOLVER_H
 #define PROBLEMSOLVER_SOLVER_H
 
+class Solver {
+
+};
+
 #endif //PROBLEMSOLVER_SOLVER_H

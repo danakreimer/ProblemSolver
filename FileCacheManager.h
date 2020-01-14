@@ -5,7 +5,7 @@
 #ifndef PROBLEMSOLVER_FILECHACHEMANAGER_H
 #define PROBLEMSOLVER_FILECHACHEMANAGER_H
 
-#include <CacheManager.h>
+#include "CacheManager.h"
 
 class FileCacheManager : public CacheManager {
 
