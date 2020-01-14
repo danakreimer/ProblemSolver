@@ -4,9 +4,9 @@
 
 #ifndef PROBLEMSOLVER_SOLVER_H
 #define PROBLEMSOLVER_SOLVER_H
-
-class Solver {
-
+template <class Problem, class Solution>
+        class Solver {
+virtual Solution solve (Problem) = 0;
 };
 
 #endif //PROBLEMSOLVER_SOLVER_H

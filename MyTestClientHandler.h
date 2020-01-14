@@ -10,13 +10,21 @@
 #include "CacheManager.h"
 #include "Solver.h"
 
+using namespace std;
 
+template<class Problem, class Solution>
 class MyTestClientHandler : public ClientHandler {
 private:
-    Solver* solver;
-    CacheManager* cm;
+    Solver<Problem, Solution> *solver;
+    CacheManager<Problem, Solution> *cm;
 
 public:
+    MyTestClientHandler(Solver<Problem, Solution> * s, CacheManager<Problem, Solution> * cm) {
+        this->solver = s;
+        this->cm = cm;
+
+    }
+
     void handleClient(int);
 
 };

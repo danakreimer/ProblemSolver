@@ -7,7 +7,10 @@
 
 #include "CacheManager.h"
 
-class FileCacheManager : public CacheManager {
+using namespace std;
+
+template <class Problem, class Solution>
+class FileCacheManager : public CacheManager<Problem, Solution> {
 
 };
 
