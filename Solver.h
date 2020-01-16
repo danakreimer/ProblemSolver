@@ -6,6 +6,7 @@
 #define PROBLEMSOLVER_SOLVER_H
 template <class Problem, class Solution>
         class Solver {
+        public:
 virtual Solution solve (Problem) = 0;
 };
 

@@ -10,6 +10,7 @@
 #include <thread>
 #include <algorithm>
 
+
 MySerialServer::MySerialServer() {
     this->run = true;
 }

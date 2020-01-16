@@ -5,9 +5,13 @@
 #ifndef PROBLEMSOLVER_SERVER_H
 #define PROBLEMSOLVER_SERVER_H
 
+
+#include "ClientHandler.h"
+
 namespace server_side {
     class Server {
-        virtual void open (int) = 0;
+    public:
+        virtual void open (int, ClientHandler*) = 0;
         virtual void stop() = 0;
     };
 }
