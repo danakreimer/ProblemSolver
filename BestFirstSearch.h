@@ -10,6 +10,8 @@
 
 template <class Problem, class Solution>
 class BestFirstSearch : MutualSearches<Problem, Solution> {
+private:
+     int numberOfNodesEvaluated = 0;
 public:
     Solution search(Searchable<Problem>* searchable) {
         this->addToOpenList(searchable->getInitialState());
@@ -17,8 +19,9 @@ public:
             State<Problem>* n = this->popOpenList();
             this->addToClosedList(n);
             if (n->Equals(searchable->getGoalState())) {
-                return this->backTrace();
+                return this->backTrace(searchable->getInitialState(), searchable->getGoalState());
             }
+            numberOfNodesEvaluated++;
             list<State<Problem>*> neighbors = searchable->getAllPossibleStates(n);
             auto it = neighbors.begin();
             for (it = neighbors.begin(); it < neighbors.end(); ++it) {
@@ -28,6 +31,7 @@ public:
                     this->addToOpenList(it);
                 } else if (n->getCost() + it->getCost() < it->getCost()) {
                     it.setCost(n->getCost() + it->getCost());
+                    it.setCameFrom(n);
                 }
             }
         }

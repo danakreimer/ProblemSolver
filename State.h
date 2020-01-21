@@ -8,15 +8,15 @@
 template <class T>
 class State {
 private:
-    T state;
+    T* state;
     double cost;
     State<T>* cameFrom;
 public:
-    State (T state) {
+    State (T* state) {
         this->state = state;
     }
     bool Equals (State<T> s) {
-        return state.Equals(s.state);
+        return state->Equals(s.state);
     }
 
     int getCost() {
@@ -35,8 +35,15 @@ public:
         this->cameFrom = s;
     }
 
-    // TODO: get back here when we figure everything out!!
+    T* getState () {
+        return this->state;
+    }
 
+    void setState (T* state) {
+        this->state = state;
+    }
+
+    // TODO: get back here when we figure everything out!!
 
 };
 

@@ -24,9 +24,19 @@ public:
         this->evaluatedNodes = 0;
         this->closed = new unordered_set<State<P>*>();
     }
-    S backTrace() {
 
+    vector<State<P>*> backTrace(State<P>* start, State<P>* end) {
+        vector<State<P>*> nodeTrace;
+        nodeTrace.emplace(nodeTrace.begin(), start);
+        State<P>* current = end->getCameFrom();
+        while (!(current->Equals(start))) {
+            nodeTrace.emplace(nodeTrace.begin(), current);
+            current = current->getCameFrom();
+        }
+        nodeTrace.emplace(nodeTrace.begin(), end);
+        return nodeTrace;
     };
+
     virtual S search (Searchable<P>* ) = 0;
     int openListSize() {
         return openList.size();

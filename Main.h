@@ -10,6 +10,7 @@
 #include "MyTestClientHandler.h"
 #include "StringReverse.h"
 #include "FileCacheManager.h"
+#include "SearcherSolver.h"
 
 namespace boot {
 
@@ -18,7 +19,9 @@ namespace boot {
         void main(int port) {
             //Solver<vector<string>, string> *solver = new GraphSolver();
             server_side::Server *A = new MySerialServer();
-            Solver<string, string>* s = new StringReverse();
+            AlgorithmOptions<Point, string>* ao = new AlgorithmOptions<Point, string>("BestFirstSearch");
+            Solver<Point, string>* s = new SearcherSolver<Point, string>(ao);
+
             CacheManager<string, string>* cm = new FileCacheManager<string, string >();
             ClientHandler *B = new MyTestClientHandler<string, string>(s, cm);
             A->open(port, B);

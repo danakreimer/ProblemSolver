@@ -15,10 +15,6 @@
 
 using namespace std;
 
-void clearGetChar() {
-    getchar();
-}
-
 template<class Problem, class Solution>
 class MyTestClientHandler : public ClientHandler {
 private:
@@ -45,11 +41,11 @@ public:
                 if (bufferWithLine.compare("end\r") == 0) {
                     break;
                 }
-                if (cm->doesSolutionExist(bufferWithLine)) {
-                    solution = cm->getSolution(bufferWithLine);
+                if (cm->doesSolutionExist(bufferWithLine, "")) {
+                    solution = cm->getSolution(bufferWithLine, "");
                 } else {
                     solution = solver->solve(bufferWithLine);
-                    cm->saveSolution( bufferWithLine, solution);
+                    cm->saveSolution( bufferWithLine, solution, "");
                 }
                 const char *solutionToSend = solution.c_str();
                 bufferWithLine = "";

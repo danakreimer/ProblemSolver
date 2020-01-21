@@ -14,3 +14,7 @@ string StringReverse::solve(string problem) {
     }
     return problem;
 }
+
+string StringReverse::getName() {
+    return "";
+}

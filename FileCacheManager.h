@@ -12,7 +12,7 @@ using namespace std;
 
 template <class Problem, class Solution>
 class FileCacheManager : public CacheManager<Problem, Solution> {
-    bool doesSolutionExist(Problem p) {
+    bool doesSolutionExist(Problem p, string algorithmName) {
         ifstream file;
         string strFileName = "";
         char currentChar;
@@ -20,13 +20,14 @@ class FileCacheManager : public CacheManager<Problem, Solution> {
 
         std::size_t fileName = std::hash<std::string>{}(p);
         strFileName = std::to_string(fileName);
+        strFileName += algorithmName;
         strFileName.append(".txt");
         file.open(strFileName);
         bool doesExist = file.good();
         file.close();
         return doesExist;
     }
-    void saveSolution(Problem p, Solution s) {
+    void saveSolution(Problem p, Solution s, string algorithmName) {
         ofstream file;
         string strFileName = "";
         char currentChar;
@@ -34,6 +35,7 @@ class FileCacheManager : public CacheManager<Problem, Solution> {
 
         std::size_t fileName = std::hash<std::string>{}(p);
         strFileName = std::to_string(fileName);
+        strFileName += algorithmName;
         strFileName.append(".txt");
 
         // Open the file
@@ -47,7 +49,7 @@ class FileCacheManager : public CacheManager<Problem, Solution> {
         }
         file.close();
     }
-    Solution getSolution (Problem p) {
+    Solution getSolution (Problem p, string algorithmName) {
         ifstream file;
         string strFileName;
         char currentChar;
@@ -56,6 +58,7 @@ class FileCacheManager : public CacheManager<Problem, Solution> {
         char *buffer = new char[100];
         std::size_t fileName = std::hash<std::string>{}(p);
         strFileName = std::to_string(fileName);
+        strFileName += algorithmName;
         strFileName.append(".txt");
 
         file.open(strFileName, ios::in);
