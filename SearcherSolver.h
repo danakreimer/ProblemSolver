@@ -12,18 +12,18 @@
 #include <string.h>
 #include <stdlib.h>
 
-template <class P, class S>
-class SearcherSolver : public Solver<P, S> {
+template <class P>
+class SearcherSolver : public Solver<Searchable<P>,string> {
 private:
-    AlgorithmOptions<P, S>* ao;
+    AlgorithmOptions<P, string>* ao;
 public:
-    SearcherSolver(AlgorithmOptions<P, S>* ao ) {
+    SearcherSolver(AlgorithmOptions<P, string>* ao ) {
         this->ao = ao;
     }
 
-    S solve(P problem) {
-        Searcher<P, S>* searcher = ao->getAlgorithm();
-        S solution = solutionFormat(searcher->search(problem));
+    string solve(Searchable<P>* problem) {
+        Searcher<P, string>* searcher = ao->getAlgorithm();
+        string solution = solutionFormat(searcher->search(problem));
         return solution;
     }
 

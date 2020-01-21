@@ -31,7 +31,7 @@ public:
             return nullptr;
         }
         if (algorithmName.compare("BestFirstSearch") == 0) {
-            return new BestFirstSearch<P, S>;
+            return new BestFirstSearch<P>;
         }
     }
 

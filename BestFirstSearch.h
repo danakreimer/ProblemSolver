@@ -8,12 +8,12 @@
 
 #include "MutualSearches.h"
 
-template <class Problem, class Solution>
-class BestFirstSearch : MutualSearches<Problem, Solution> {
+template <class Problem>
+class BestFirstSearch : MutualSearches<Problem, string> {
 private:
      int numberOfNodesEvaluated = 0;
 public:
-    Solution search(Searchable<Problem>* searchable) {
+    vector<State<Problem>*> search(Searchable<Problem>* searchable) {
         this->addToOpenList(searchable->getInitialState());
         while (this->openListSize() > 0) {
             State<Problem>* n = this->popOpenList();

@@ -68,7 +68,9 @@ protected:
 
         for (it = openList.begin(); it != openList.end(); ++it) {
             if (it.getCost() < min->getCost()) {
-                min = it;
+                min->setCost(it.getCost());
+                min->setState(it.getState());
+                min->setCameFrom(*it.getCameFrom());
             }
         }
 

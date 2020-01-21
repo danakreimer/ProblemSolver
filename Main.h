@@ -7,10 +7,13 @@
 
 #include <string>
 #include "MySerialServer.h"
-#include "MyTestClientHandler.h"
+#include "MyClientHandler.h"
 #include "StringReverse.h"
 #include "FileCacheManager.h"
 #include "SearcherSolver.h"
+#include "Matrix.h"
+
+using namespace std;
 
 namespace boot {
 
@@ -20,10 +23,10 @@ namespace boot {
             //Solver<vector<string>, string> *solver = new GraphSolver();
             server_side::Server *A = new MySerialServer();
             AlgorithmOptions<Point, string>* ao = new AlgorithmOptions<Point, string>("BestFirstSearch");
-            Solver<Point, string>* s = new SearcherSolver<Point, string>(ao);
+            Solver<Searchable<Point>, string>* s = new SearcherSolver<Point>(ao);
 
-            CacheManager<string, string>* cm = new FileCacheManager<string, string >();
-            ClientHandler *B = new MyTestClientHandler<string, string>(s, cm);
+            CacheManager<string, string>* cm = new FileCacheManager<string>();
+            ClientHandler *B = new MyClientHandler<string, Point>(s, cm);
             A->open(port, B);
             delete(A);
             delete(B);

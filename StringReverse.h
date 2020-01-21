@@ -12,7 +12,7 @@ using namespace std;
 
 class StringReverse : public Solver<string, string> {
 public:
-    string solve (string) override;
+    string solve (string);
     string getName ();
 };
 

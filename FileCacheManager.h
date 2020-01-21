@@ -10,8 +10,8 @@
 
 using namespace std;
 
-template <class Problem, class Solution>
-class FileCacheManager : public CacheManager<Problem, Solution> {
+template <class Problem>
+class FileCacheManager : public CacheManager<Problem, string> {
     bool doesSolutionExist(Problem p, string algorithmName) {
         ifstream file;
         string strFileName = "";
@@ -27,7 +27,7 @@ class FileCacheManager : public CacheManager<Problem, Solution> {
         file.close();
         return doesExist;
     }
-    void saveSolution(Problem p, Solution s, string algorithmName) {
+    void saveSolution(Problem p, string s, string algorithmName) {
         ofstream file;
         string strFileName = "";
         char currentChar;
@@ -49,12 +49,12 @@ class FileCacheManager : public CacheManager<Problem, Solution> {
         }
         file.close();
     }
-    Solution getSolution (Problem p, string algorithmName) {
+    string getSolution (Problem p, string algorithmName) {
         ifstream file;
         string strFileName;
         char currentChar;
         int i;
-        Solution s;
+        string s;
         char *buffer = new char[100];
         std::size_t fileName = std::hash<std::string>{}(p);
         strFileName = std::to_string(fileName);

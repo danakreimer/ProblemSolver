@@ -17,14 +17,14 @@
 
 using namespace std;
 
-template<class Problem, class Solution>
+template<class Problem, class T>
 class MyClientHandler : public ClientHandler {
     private:
-        Solver<Problem, Solution> *solver;
-        CacheManager<Problem, Solution> *cm;
+        Solver<Searchable<T>, string> *solver;
+        CacheManager<Problem, string> *cm;
 
     public:
-        MyClientHandler(Solver<Problem, Solution> * s, CacheManager<Problem, Solution> * cm) {
+        MyClientHandler(Solver<Searchable<T>, string> * s, CacheManager<Problem, string> * cm) {
             this->solver = s;
             this->cm = cm;
 
@@ -42,7 +42,7 @@ class MyClientHandler : public ClientHandler {
             Point* start;
             Point* end;
             string nameAlgorithm;
-            string strProblem;
+            string strProblem = "";
             while (read(socketId, buffer1, 1)) {
                 char currChar = buffer1[0];
                 if (currChar != '\n') {
