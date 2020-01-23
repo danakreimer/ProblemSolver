@@ -23,6 +23,7 @@ public:
     State<Point>* getInitialState() override;
     State<Point>* getGoalState() override;
     list<State<Point>*>* getAllPossibleStates (State<Point>* s) override;
+    double getDistance(State<Point>*,State<Point>* );
 };
 
 

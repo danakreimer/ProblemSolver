@@ -12,6 +12,7 @@ private:
     double cost = 0;
     double cumulativeCost = 0;
     State<T>* cameFrom = nullptr;
+    double heuristicCost = 0;
 public:
 
     State(double cost, T *state){
@@ -55,13 +56,23 @@ public:
       this->cumulativeCost = cumulativeCost;
     }
 
+    double getHeuristicCost(){
+      return this->heuristicCost;
+    }
+
+    void setHeuristicCost(double heuristicCost){
+      this->heuristicCost = heuristicCost;
+    }
+
     State<T>& operator= (const State<T> &other)  {
     this->cost = other.getCost();
     this->state = other.getState();
     this->cameFrom = other.getCameFrom();
     this->cumulativeCost = other.getCumulativeCost();
+    this->heuristicCost = other.getHeuristicCost();
     return *this;
   }
+
 
     // TODO: get back here when we figure everything out!!
 

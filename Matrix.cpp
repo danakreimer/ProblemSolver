@@ -77,4 +77,10 @@ list<State<class Point> *> * Matrix::getAllPossibleStates(State<class Point> * s
     return neighbors;
 }
 
+double Matrix::getDistance(State<Point> *state1,State<Point> *state2) {
+    double xDistance = abs(state1->getState()->getX() - state2->getState()->getX());
+    double yDistance = abs(state1->getState()->getY() - state2->getState()->getY());
+    return sqrt(pow(xDistance,2)+pow(yDistance,2));
+}
+
 

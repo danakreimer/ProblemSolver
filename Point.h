@@ -5,49 +5,49 @@
 #ifndef PROBLEMSOLVER_POINT_H
 #define PROBLEMSOLVER_POINT_H
 
-
+#include <cmath>
 class Point {
-private:
-    int x;
-    int y;
-public:
-    Point(int x, int y) {
-        this->x = x;
-        this->y = y;
-    }
+ private:
+  int x;
+  int y;
+ public:
+  Point(int x, int y) {
+    this->x = x;
+    this->y = y;
+  }
 
-    int getX() const {
-        return this->x;
-    }
+  int getX() const {
+    return this->x;
+  }
 
-    int getY() const  {
-        return this->y;
-    }
+  int getY() const {
+    return this->y;
+  }
 
-    void setX(int x) {
-        this->x = x;
-    }
+  void setX(int x) {
+    this->x = x;
+  }
 
-    void setY(int y) {
-        this->y = y;
-    }
+  void setY(int y) {
+    this->y = y;
+  }
 
-    void setPoint(Point* point) {
-        this->setX(point->x);
-        this->setY(point->y);
-    }
+  void setPoint(Point *point) {
+    this->setX(point->x);
+    this->setY(point->y);
+  }
 
-    bool operator== (const Point &other) const {
-        return this->getX() == other.getX() && this->getY() == other.getY();
-    }
-  bool Equals (Point* other) {
+  bool operator==(const Point &other) const {
+    return this->getX() == other.getX() && this->getY() == other.getY();
+  }
+  bool Equals(Point *other) {
     return this->getX() == other->getX() && this->getY() == other->getY();
   }
-  void operator= (const Point &other)  {
-     this->x = other.getX();
+  void operator=(const Point &other) {
+    this->x = other.getX();
     this->y = other.getY();
   }
-};
 
+};
 
 #endif //PROBLEMSOLVER_POINT_H
