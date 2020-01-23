@@ -9,21 +9,19 @@
 #include "AlgorithmOptions.h"
 #include "Point.h"
 #include <string>
-#include <string.h>
-#include <stdlib.h>
-
 template <class P>
 class SearcherSolver : public Solver<Searchable<P>,string> {
 private:
-    AlgorithmOptions<P, string>* ao;
+    AlgorithmOptions<P>* ao;
 public:
-    SearcherSolver(AlgorithmOptions<P, string>* ao ) {
+    SearcherSolver(AlgorithmOptions<P>* ao ) {
         this->ao = ao;
     }
 
     string solve(Searchable<P>* problem) {
-        Searcher<P, string>* searcher = ao->getAlgorithm();
-        string solution = solutionFormat(searcher->search(problem));
+        Searcher<P>* searcher = ao->getAlgorithm();
+       vector<State<Point>*> vec = searcher->search(problem);
+        string solution = solutionFormat(vec);
         return solution;
     }
 
@@ -31,33 +29,36 @@ public:
         return ao->getAlgorithmName();
     }
 
-    string solutionFormat (vector<State<Point>>* solution) {
+    string solutionFormat (vector<State<Point>*> solution) {
         string strSolution = "";
         string direction;
+        string strToSend ="";
         basic_string<char> cost;
         int x;
         int y;
-        auto it = solution->begin();
+        auto it = solution.begin();
 
-        for(it = solution->begin(); it != solution->end() - 1; it++) {
-            auto next = it++;
-            if (it->getState()->getX() + 1 == next->getState()->getX()) {
-                strSolution += "Right";
-            }
-            if (it->getState()->getX() - 1 == next->getState()->getX()) {
-                strSolution += "Left";
-            }
-            if (it->getState()->getY() + 1 == next->getState()->getY()) {
+        for(it = solution.begin(); it != solution.end() - 1; it++) {
+            auto next = it + 1;
+            if ((*it)->getState()->getX() + 1 == (*next)->getState()->getX()) {
                 strSolution += "Down";
             }
-            if (it->getState()->getY() - 1 == next->getState()->getY()) {
+            if ((*it)->getState()->getX() - 1 == (*next)->getState()->getX()) {
                 strSolution += "Up";
             }
+            if ((*it)->getState()->getY() + 1 == (*next)->getState()->getY()) {
+                strSolution += "Right";
+            }
+            if ((*it)->getState()->getY() - 1 == (*next)->getState()->getY()) {
+                strSolution += "Left";
+            }
 
-            cost = to_string(it->getCost());
-            strSolution = strSolution + " " + "(" + cost + ")" + ", ";
+            cost = to_string((*next)->getCumulativeCost());
+            strSolution +=" ";
+            strSolution+= "(" + cost + ")" + ", ";
         }
-        return strSolution;
+        strToSend = strSolution.substr(0, strSolution.size()-2);
+        return strToSend;
     }
 };
 

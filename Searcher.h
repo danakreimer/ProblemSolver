@@ -7,10 +7,10 @@
 
 #include "Searchable.h"
 
-template <class P, class S>
+template <class P>
 class Searcher {
 public:
-    virtual S search (Searchable<P>* ) = 0;
+    virtual vector<State<P>*> search (Searchable<P>*) = 0;
     virtual int getNumberOfNodesEvaluated() = 0;
 };
 

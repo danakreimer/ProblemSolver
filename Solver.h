@@ -9,11 +9,11 @@
 
 using namespace std;
 
-template <class Problem, class Solution>
-        class Solver {
-        public:
-virtual Solution solve (Problem*) = 0;
-virtual string getName() = 0;
+template<class Problem, class Solution>
+class Solver {
+ public:
+  virtual Solution solve(Problem *) = 0;
+  virtual string getName() = 0;
 };
 
 #endif //PROBLEMSOLVER_SOLVER_H

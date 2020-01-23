@@ -20,7 +20,7 @@ public:
         return this->x;
     }
 
-    int getY() const {
+    int getY() const  {
         return this->y;
     }
 
@@ -40,7 +40,13 @@ public:
     bool operator== (const Point &other) const {
         return this->getX() == other.getX() && this->getY() == other.getY();
     }
-
+  bool Equals (Point* other) {
+    return this->getX() == other->getX() && this->getY() == other->getY();
+  }
+  void operator= (const Point &other)  {
+     this->x = other.getX();
+    this->y = other.getY();
+  }
 };
 
 

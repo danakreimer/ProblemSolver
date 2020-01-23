@@ -6,12 +6,11 @@
 #define PROBLEMSOLVER_ALGORYTHEMOPTIONS_H
 
 #include <string>
-#include "Searcher.h"
 #include "BestFirstSearch.h"
 
 using namespace std;
 
-template <class P, class S>
+template <class P>
 class AlgorithmOptions {
 private:
     string algorithmName;
@@ -20,7 +19,7 @@ public:
         this->algorithmName = algorithmName;
     }
 
-    Searcher<P, S>* getAlgorithm () {
+    Searcher<P>* getAlgorithm () {
         if (algorithmName.compare("BFS") == 0) {
             return nullptr;
         }

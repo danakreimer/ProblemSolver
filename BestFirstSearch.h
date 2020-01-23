@@ -9,7 +9,7 @@
 #include "MutualSearches.h"
 
 template <class Problem>
-class BestFirstSearch : MutualSearches<Problem, string> {
+class BestFirstSearch : public MutualSearches<Problem> {
 private:
      int numberOfNodesEvaluated = 0;
 public:
@@ -22,19 +22,19 @@ public:
                 return this->backTrace(searchable->getInitialState(), searchable->getGoalState());
             }
             numberOfNodesEvaluated++;
-            list<State<Problem>*> neighbors = searchable->getAllPossibleStates(n);
-            auto it = neighbors.begin();
-            for (it = neighbors.begin(); it < neighbors.end(); ++it) {
-                if (!this->closedContains(it) && !this->openContains(it)) {
-                    it.setCameFrom(n);
-                    it.setCost(n->getCost() + it->getCost());
-                    this->addToOpenList(it);
-                } else if (n->getCost() + it->getCost() < it->getCost()) {
-                    it.setCost(n->getCost() + it->getCost());
-                    it.setCameFrom(n);
+            list<State<Problem>*>* neighbors = searchable->getAllPossibleStates(n);
+            for (typename list<State<Problem>*>::iterator it = neighbors->begin(); it != neighbors->end(); ++it) {
+                if (!this->closedContains(*it) && !this->openContains(*it)) {
+                  (*it)->setCameFrom(n);
+                  (*it)->setCumulativeCost((n->getCumulativeCost() + (*it)->getCost()));
+                    this->addToOpenList(*it);
+                } else if (n->getCumulativeCost() + (*it)->getCost() < (*it)->getCumulativeCost()) {
+                  (*it)->setCumulativeCost((n->getCumulativeCost() + (*it)->getCost()));
+                  (*it)->setCameFrom(n);
                 }
             }
         }
+        throw "no Path";
     }
 
 };

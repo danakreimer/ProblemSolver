@@ -9,17 +9,21 @@ template <class T>
 class State {
 private:
     T* state;
-    double cost;
-    State<T>* cameFrom;
+    double cost = 0;
+    double cumulativeCost = 0;
+    State<T>* cameFrom = nullptr;
 public:
-    State (T* state) {
-        this->state = state;
+
+    State(double cost, T *state){
+      this->cost = cost;
+      this->state = state;
+      this->cumulativeCost = cost;
     }
-    bool Equals (State<T> s) {
-        return state->Equals(s.state);
+    bool Equals (State<T>* s) {
+        return state->Equals(s->state);
     }
 
-    int getCost() {
+    double getCost() {
         return this->cost;
     }
 
@@ -42,6 +46,22 @@ public:
     void setState (T* state) {
         this->state = state;
     }
+
+    double getCumulativeCost(){
+      return this->cumulativeCost;
+    }
+
+    void setCumulativeCost(double cumulativeCost){
+      this->cumulativeCost = cumulativeCost;
+    }
+
+    State<T>& operator= (const State<T> &other)  {
+    this->cost = other.getCost();
+    this->state = other.getState();
+    this->cameFrom = other.getCameFrom();
+    this->cumulativeCost = other.getCumulativeCost();
+    return *this;
+  }
 
     // TODO: get back here when we figure everything out!!
 
