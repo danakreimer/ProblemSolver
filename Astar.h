@@ -18,9 +18,9 @@ class Astar : public MutualSearches<Problem> {
     State<Problem> *currState = searchable->getInitialState();
     currState->setHeuristicCost(searchable->getDistance(currState, searchable->getGoalState()));
 
-    this->addToOpenListAstar(currState);
+    this->addToOpenList(currState);
     while (this->openListSize() > 0) {
-      currState = this->popOpenList();
+      currState = this->popOpenListAstar();
 
       if (currState->Equals(searchable->getGoalState())) {
         return this->backTrace(searchable->getInitialState(), searchable->getGoalState());

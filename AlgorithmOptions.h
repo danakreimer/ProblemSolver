@@ -7,7 +7,7 @@
 
 #include <string>
 #include "BestFirstSearch.h"
-
+# include "Astar.h"
 using namespace std;
 
 template <class P>
@@ -26,8 +26,8 @@ public:
         if (algorithmName.compare("DFS") == 0) {
             return nullptr;
         }
-        if (algorithmName.compare("AStar") == 0) {
-            return nullptr;
+        if (algorithmName.compare("Astar") == 0) {
+            return new Astar<P>;
         }
         if (algorithmName.compare("BestFirstSearch") == 0) {
             return new BestFirstSearch<P>;
