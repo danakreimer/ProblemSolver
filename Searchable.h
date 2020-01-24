@@ -16,6 +16,7 @@ public:
     virtual State<T>* getInitialState() = 0;
     virtual State<T>* getGoalState() = 0;
     virtual list<State<T>*>* getAllPossibleStates (State<T>* s) = 0;
+    virtual double getDistance(State<T>*,State<T>* ) = 0;
 };
 
 #endif //PROBLEMSOLVER_SEARCHABLE_H
