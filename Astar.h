@@ -9,29 +9,43 @@
 #include "MutualSearches.h"
 
 using namespace std;
-template <class Problem>
+template<class Problem>
 class Astar : public MutualSearches<Problem> {
  private:
   int numberOfNodesEvaluated = 0;
  public:
-  vector<State<Problem>*> search(Searchable<Problem>* searchable) {
-    this->addToOpenListAstar(searchable->getInitialState());
+  vector<State<Problem> *> search(Searchable<Problem> *searchable) {
+    State<Problem> *currState = searchable->getInitialState();
+    currState->setHeuristicCost(searchable->getDistance(currState, searchable->getGoalState()));
+
+    this->addToOpenListAstar(currState);
     while (this->openListSize() > 0) {
-      State<Problem>* n = this->popOpenList();
-      this->addToClosedList(n);
-      if (n->Equals(searchable->getGoalState())) {
+      currState = this->popOpenList();
+
+      if (currState->Equals(searchable->getGoalState())) {
         return this->backTrace(searchable->getInitialState(), searchable->getGoalState());
       }
       numberOfNodesEvaluated++;
-      list<State<Problem>*>* neighbors = searchable->getAllPossibleStates(n);
-      for (typename list<State<Problem>*>::iterator it = neighbors->begin(); it != neighbors->end(); ++it) {
+      this->addToClosedList(currState);
+      list<State<Problem> *> *neighbors = searchable->getAllPossibleStates(currState);
+      for (typename list<State<Problem> *>::iterator it = neighbors->begin(); it != neighbors->end(); ++it) {
+        double g = currState->getCumulativeCost() + (*it)->getCost();
+        double h = searchable->getDistance((*it), searchable->getGoalState());
+        double f = g + h;
+
         if (!this->closedContains(*it) && !this->openContains(*it)) {
-          (*it)->setCameFrom(n);
-          (*it)->setCumulativeCost((n->getCumulativeCost() + (*it)->getCost()));
+          (*it)->setCameFrom(currState);
+          (*it)->setCumulativeCost(g);
+          (*it)->setHeuristicCost(h);
           this->addToOpenList(*it);
-        } else if (n->getCumulativeCost() + (*it)->getCost() < (*it)->getCumulativeCost()) {
-          (*it)->setCumulativeCost((n->getCumulativeCost() + (*it)->getCost()));
-          (*it)->setCameFrom(n);
+        } else if (!this->closedContains(*it) && this->openContains(*it)) {
+          if (f < (*it)->getCumulativeCost()+(*it)->getHeuristicCost()){
+            (*it)->setCameFrom(currState);
+            (*it)->setCumulativeCost(g);
+            (*it)->setHeuristicCost(h);
+          }
+            //n->getCumulativeCost() + (*it)->getCost() < (*it)->getCumulativeCost()) {
+
         }
       }
     }

@@ -50,7 +50,7 @@ class MyClientHandler : public ClientHandler {
       } else {
 
         // Get the start point and the end point from the last two lines of the matrix
-        if (bufferWithLine == "end\r") {
+        if (bufferWithLine == "end") {
           end = new Point(matrixVec.at(rowIndex - 1).at(0), matrixVec.at(rowIndex - 1).at(1));
           //end->setX(matrixVec.at(rowIndex - 1).at(0));
           //end->setY(matrixVec.at(rowIndex - 1).at(1));
