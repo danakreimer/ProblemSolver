@@ -55,7 +55,6 @@ class FileCacheManager : public CacheManager<Problem, string> {
         char currentChar;
         int i;
         string s;
-        char *buffer = new char[100];
         std::size_t fileName = std::hash<std::string>{}(p);
         strFileName = std::to_string(fileName);
         strFileName += algorithmName;
@@ -64,7 +63,7 @@ class FileCacheManager : public CacheManager<Problem, string> {
         file.open(strFileName, ios::in);
         if (file.is_open()) {
             //file.read((char*)&s, sizeof(s));
-            file >> s;
+            getline(file, s);
         } else {
             throw "object doesnt exist in cache or files";
         }
