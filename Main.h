@@ -23,7 +23,7 @@ namespace boot {
           try {
             //Solver<vector<string>, string> *solver = new GraphSolver();
             server_side::Server *A = new MyParallelServer();
-            AlgorithmOptions<Point>* ao = new AlgorithmOptions<Point>("Astar");
+            AlgorithmOptions<Point>* ao = new AlgorithmOptions<Point>("DFS");
             Solver<Searchable<Point>, string>* s = new SearcherSolver<Point>(ao);
             CacheManager<string, string>* cm = new FileCacheManager<string>();
             ClientHandler *B = new MyClientHandler<string, Point>(s, cm);

@@ -8,6 +8,8 @@
 #include <string>
 #include "BestFirstSearch.h"
 # include "Astar.h"
+#include "BFS.h"
+#include "DFS.h"
 using namespace std;
 
 template <class P>
@@ -21,10 +23,10 @@ public:
 
     Searcher<P>* getAlgorithm () {
         if (algorithmName.compare("BFS") == 0) {
-            return nullptr;
+            return new BFS<P>;
         }
         if (algorithmName.compare("DFS") == 0) {
-            return nullptr;
+            return new DFS<P>;
         }
         if (algorithmName.compare("Astar") == 0) {
             return new Astar<P>;

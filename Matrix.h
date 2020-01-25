@@ -24,6 +24,7 @@ public:
     State<Point>* getGoalState() override;
     list<State<Point>*>* getAllPossibleStates (State<Point>* s) override;
     double getDistance(State<Point>*,State<Point>* );
+    void setCurr(State<Point>*);
 };
 
 

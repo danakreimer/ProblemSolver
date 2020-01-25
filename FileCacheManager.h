@@ -6,13 +6,18 @@
 #define PROBLEMSOLVER_FILECHACHEMANAGER_H
 
 #include <fstream>
+#include <mutex>
 #include "CacheManager.h"
 
 using namespace std;
 
 template <class Problem>
 class FileCacheManager : public CacheManager<Problem, string> {
+private:
+    std::mutex fileLock;
+public:
     bool doesSolutionExist(Problem p, string algorithmName) {
+        fileLock.lock();
         ifstream file;
         string strFileName = "";
         char currentChar;
@@ -25,9 +30,11 @@ class FileCacheManager : public CacheManager<Problem, string> {
         file.open(strFileName);
         bool doesExist = file.good();
         file.close();
+        fileLock.unlock();
         return doesExist;
     }
     void saveSolution(Problem p, string s, string algorithmName) {
+        fileLock.lock();
         ofstream file;
         string strFileName = "";
         char currentChar;
@@ -48,8 +55,10 @@ class FileCacheManager : public CacheManager<Problem, string> {
             throw "could not open file";
         }
         file.close();
+        fileLock.unlock();
     }
     string getSolution (Problem p, string algorithmName) {
+        fileLock.lock();
         ifstream file;
         string strFileName;
         char currentChar;
@@ -69,10 +78,9 @@ class FileCacheManager : public CacheManager<Problem, string> {
         }
 
         file.close();
+        fileLock.unlock();
         return s;
     }
-
-
 };
 
 #endif //PROBLEMSOLVER_FILECHACHEMANAGER_H

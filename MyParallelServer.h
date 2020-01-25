@@ -15,6 +15,7 @@ using namespace std;
 class MyParallelServer : public server_side::Server {
 private:
     bool run;
+    int server_socket;
     vector<thread> clients;
 public:
     MyParallelServer() {
@@ -23,7 +24,9 @@ public:
 
     void open(int, ClientHandler*);
     void stop();
-
+    int getServerSocker() {
+        return this->server_socket;
+    }
 };
 
 

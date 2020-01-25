@@ -9,6 +9,8 @@
 #include "AlgorithmOptions.h"
 #include "Point.h"
 #include <string>
+#include <iostream>
+
 template <class P>
 class SearcherSolver : public Solver<Searchable<P>,string> {
 private:
@@ -20,7 +22,7 @@ public:
 
     string solve(Searchable<P>* problem) {
         Searcher<P>* searcher = ao->getAlgorithm();
-       vector<State<Point>*> vec = searcher->search(problem);
+        vector<State<Point>*> vec = searcher->search(problem);
         string solution = solutionFormat(vec);
         return solution;
     }

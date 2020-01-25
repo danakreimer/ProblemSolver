@@ -2,6 +2,7 @@
 // Created by duni on 21/01/2020.
 //
 
+#include <iostream>
 #include "Matrix.h"
 
 Matrix::Matrix(vector<vector<double>>* matrixVec, Point* start, Point* end) {
@@ -14,6 +15,7 @@ Matrix::Matrix(vector<vector<double>>* matrixVec, Point* start, Point* end) {
     for (i = 0; i < numOfRows; i++) {
         for (j = 0; j < numOfColumns; j++) {
             auto* pointCurr = new Point(i, j);
+//            cout << "matrixVec[" << i << ", " << j << "] = " << matrixVec->at(i).at(j) << endl;
             auto* matrixState = new State<Point>(matrixVec->at(i).at(j),pointCurr);
             //matrixState->setCost(matrixVec->at(i).at(j));
             this->matrix->emplace_back(matrixState);
@@ -46,10 +48,10 @@ list<State<class Point> *> * Matrix::getAllPossibleStates(State<class Point> * s
 
     int currCell = x*this->numOfColumns + y;
 
-    if (y != this->numOfColumns - 1) {
-        State<Point>* neighborRight = matrix->at(currCell + 1);
-        if (neighborRight->getCost() != -1) {
-            neighbors->push_back(neighborRight);
+    if (x != 0) {
+        State<Point>* neighborUp = matrix->at(currCell - numOfColumns);
+        if (neighborUp->getCost() != -1) {
+            neighbors->push_back(neighborUp);
         }
     }
 
@@ -60,17 +62,17 @@ list<State<class Point> *> * Matrix::getAllPossibleStates(State<class Point> * s
         }
     }
 
-    if (x != 0) {
-        State<Point>* neighborUp = matrix->at(currCell - numOfColumns);
-        if (neighborUp->getCost() != -1) {
-            neighbors->push_back(neighborUp);
-        }
-    }
-
     if (x != this->numOfRows - 1) {
         State<Point>* neighborDown = matrix->at(currCell + numOfColumns);
         if (neighborDown->getCost() != -1) {
             neighbors->push_back(neighborDown);
+        }
+    }
+
+    if (y != this->numOfColumns - 1) {
+        State<Point>* neighborRight = matrix->at(currCell + 1);
+        if (neighborRight->getCost() != -1) {
+            neighbors->push_back(neighborRight);
         }
     }
 
