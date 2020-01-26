@@ -43,6 +43,10 @@ public:
         return this->getX() == other.getX() && this->getY() == other.getY();
     }
 
+    bool Equals(Point *other) {
+        return this->getX() == other->getX() && this->getY() == other->getY();
+    }
+
     // This function preforms placement of a given point to the current point
     void operator=(const Point &other) {
         this->x = other.getX();
