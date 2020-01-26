@@ -24,7 +24,7 @@ public:
 
     void open(int, ClientHandler*);
     void stop();
-    int getServerSocker() {
+    int getServerSocket() {
         return this->server_socket;
     }
 };

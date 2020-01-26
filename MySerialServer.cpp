@@ -10,27 +10,30 @@
 #include <thread>
 #include <algorithm>
 
-
+// This is a constructor function
 MySerialServer::MySerialServer() {
     this->run = true;
 }
 
+// This function stops the connection
 void MySerialServer::stop() {
     this->run = false;
 }
 
-void acceptClients(bool *run, ClientHandler *ch, int serverFd, sockaddr_in* socketAddress) {
+// This function handles the clients
+void acceptClients(bool *run, ClientHandler *ch, int serverFd, sockaddr_in *socketAddress) {
     int newSocket;
     int addressLength = sizeof(socketAddress);
-    struct timeval time;
+    struct timeval time{};
     int timeout_in_seconds = 120;
     time.tv_sec = timeout_in_seconds;
 
+    // while the function that stops the connection hasn't been called, continue handling the clients
     while (run) {
         // Accept clients
         cout << "accepting clients" << endl;
 
-        if (setsockopt(serverFd, SOL_SOCKET, SO_RCVTIMEO,(const char*) &time, sizeof(time))) {
+        if (setsockopt(serverFd, SOL_SOCKET, SO_RCVTIMEO, (const char *) &time, sizeof(time))) {
             perror("setsockopt");
             exit(EXIT_FAILURE);
         }
@@ -42,14 +45,15 @@ void acceptClients(bool *run, ClientHandler *ch, int serverFd, sockaddr_in* sock
 
         cout << "client connected, listen for messages" << endl;
 
+        // Send each client to it's way that calculates the answer to send
         ch->handleClient(newSocket);
         close(newSocket);
     }
     close(serverFd);
 }
 
+// This function opens the socket and prepares to accept and handle the different clients
 void MySerialServer::open(int port, ClientHandler *ch) {
-
     int serverFd, newSocket, readValue;
     struct sockaddr_in socketAddress;
     int optionNumber = 1;

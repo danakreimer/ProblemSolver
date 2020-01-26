@@ -20,7 +20,9 @@ private:
 
 public:
     MySerialServer();
-    void open(int, ClientHandler*);
+
+    void open(int, ClientHandler *);
+
     void stop();
 
 };

@@ -19,19 +19,19 @@ void acceptClients(sockaddr_in* socketAddress, ClientHandler *ch, bool *run, vec
     int addressLength = sizeof(socketAddress);
     fd_set master_set;
     FD_ZERO(&master_set);
-    FD_SET(thisServer->getServerSocker(), &master_set);
+    FD_SET(thisServer->getServerSocket(), &master_set);
     int rc;
     struct timeval time;
     int timeout_in_seconds = 120;
     time.tv_sec = timeout_in_seconds;
     time.tv_usec = 0;
 
-    cout << "accepting clients at port " << thisServer->getServerSocker() << endl;
+    cout << "accepting clients at port " << thisServer->getServerSocket() << endl;
     while (*run) {
         // Accept clients
-        rc = select(thisServer->getServerSocker() + 1, &master_set, NULL, NULL, &time);
+        rc = select(thisServer->getServerSocket() + 1, &master_set, NULL, NULL, &time);
         if (rc > 0) {
-            if ((newSocket = accept(thisServer->getServerSocker(),
+            if ((newSocket = accept(thisServer->getServerSocket(),
                     (struct sockaddr *) &socketAddress, (socklen_t *) &addressLength)) < 0) {
                 if (errno == EWOULDBLOCK || errno == EAGAIN) {
                     thisServer->stop();
@@ -49,7 +49,7 @@ void acceptClients(sockaddr_in* socketAddress, ClientHandler *ch, bool *run, vec
         }
     }
 
-    close(thisServer->getServerSocker());
+    close(thisServer->getServerSocket());
 }
 
 
@@ -64,19 +64,6 @@ void MyParallelServer::open(int port, class ClientHandler * ch) {
         exit(EXIT_FAILURE);
     }
     server_socket = serverFd;
-
-    // Attaching socket
-//    if (setsockopt(serverFd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &optionNumber, sizeof(optionNumber))) {
-//        perror("setsockopt");
-//        exit(EXIT_FAILURE);
-//    }
-//
-//    if (setsockopt(serverFd, SOL_SOCKET, SO_RCVTIMEO,(const char*) &time, sizeof(time)) < 0) {
-//        perror("setsockopt");
-//        exit(EXIT_FAILURE);
-//    }
-
-//    bzero((char*) &socketAddress, sizeof(socketAddress));
     socketAddress.sin_family = AF_INET;
     socketAddress.sin_addr.s_addr = INADDR_ANY;
     socketAddress.sin_port = htons(port);

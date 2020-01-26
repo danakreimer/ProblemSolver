@@ -5,11 +5,10 @@
 #include <string>
 #include "Main.h"
 
-using namespace std ;
-//using namespace boot;
+using namespace std;
 
 int main(int argc, char *argv[]) {
-    boot::Main().main(stoi(argv[1])) ;
+    boot::Main().main(stoi(argv[1]));
     return 0;
 }
 

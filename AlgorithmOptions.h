@@ -10,18 +10,21 @@
 # include "Astar.h"
 #include "BFS.h"
 #include "DFS.h"
+
 using namespace std;
 
-template <class P>
+template<class P>
 class AlgorithmOptions {
 private:
     string algorithmName;
 public:
+    // This is a constructor function
     AlgorithmOptions(string algorithmName) {
         this->algorithmName = algorithmName;
     }
 
-    Searcher<P>* getAlgorithm () {
+    // This function returns the suitable algorithm for the given problem
+    Searcher<P> *getAlgorithm() {
         if (algorithmName.compare("BFS") == 0) {
             return new BFS<P>;
         }
@@ -36,7 +39,8 @@ public:
         }
     }
 
-    string getAlgorithmName () {
+    // This function returns the name of the algorithm that solved the problem
+    string getAlgorithmName() {
         return this->algorithmName;
     }
 };
