@@ -20,19 +20,24 @@ namespace boot {
     class Main {
     public:
         void main(int port) {
-          try {
-            //Solver<vector<string>, string> *solver = new GraphSolver();
-            server_side::Server *A = new MyParallelServer();
-            AlgorithmOptions<Point>* ao = new AlgorithmOptions<Point>("Astar");
-            Solver<Searchable<Point>, string>* s = new SearcherSolver<Point>(ao);
-            CacheManager<string, string>* cm = new FileCacheManager<string>();
-            ClientHandler *B = new MyClientHandler<string, Point>(s, cm);
-            A->open(port, B);
-            delete(A);
-            delete(B);
-          }
+            try {
+                // Create the parallel server
+                server_side::Server *A = new MyParallelServer();
+                // Implement the chosen algorithm to solve the problem
+                AlgorithmOptions<Point> *ao = new AlgorithmOptions<Point>("Astar");
+                // Create the object adapter that will connect the solver to the searcher
+                Solver<Searchable<Point>, string> *s = new SearcherSolver<Point>(ao);
+                // Create the cache manager that will run the solved problems by now
+                CacheManager<string, string> *cm = new FileCacheManager<string>();
+                // Create the client handler to read the problem with
+                ClientHandler *B = new MyClientHandler<string, Point>(s, cm);
+                // Open the socket to handle the date from the server
+                A->open(port, B);
+                delete (A);
+                delete (B);
+            }
 
-          catch (const char* e) {}
+            catch (const char *e) {}
         }
     };
 }

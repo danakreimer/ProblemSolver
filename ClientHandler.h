@@ -6,8 +6,8 @@
 #define PROBLEMSOLVER_CLIENTHANDLER_H
 
 class ClientHandler {
- public:
-  virtual void handleClient(int) = 0;
+public:
+    virtual void handleClient(int) = 0;
 };
 
 #endif //PROBLEMSOLVER_CLIENTHANDLER_H

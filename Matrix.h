@@ -10,18 +10,22 @@
 #include <vector>
 
 class Matrix : public Searchable<Point> {
- private:
-  State<Point> *initialState;
-  State<Point> *goalState;
-  vector<State<Point> *> *matrix;
-  int numOfRows = 0;
-  int numOfColumns = 0;
- public:
-  Matrix(vector<vector<double >> *, Point *, Point *);
-  State<Point> *getInitialState() override;
-  State<Point> *getGoalState() override;
-  list<State<Point> *> *getAllPossibleStates(State<Point> *s) override;
-  double getDistance(State<Point> *, State<Point> *) override;
+private:
+    State<Point> *initialState;
+    State<Point> *goalState;
+    vector<State<Point> *> *matrix;
+    int numOfRows = 0;
+    int numOfColumns = 0;
+public:
+    Matrix(vector<vector<double >> *, Point *, Point *);
+
+    State<Point> *getInitialState() override;
+
+    State<Point> *getGoalState() override;
+
+    list<State<Point> *> *getAllPossibleStates(State<Point> *s) override;
+
+    double getDistance(State<Point> *, State<Point> *) override;
 };
 
 #endif //PROBLEMSOLVER_MATRIX_H

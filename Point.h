@@ -43,6 +43,7 @@ public:
         return this->getX() == other.getX() && this->getY() == other.getY();
     }
 
+    // This function checks if the current point is equal to the given point
     bool Equals(Point *other) {
         return this->getX() == other->getX() && this->getY() == other->getY();
     }

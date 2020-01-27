@@ -11,7 +11,7 @@
 
 using namespace std;
 
-template <class Problem>
+template<class Problem>
 class FileCacheManager : public CacheManager<Problem, string> {
 private:
     std::mutex fileLock;
@@ -70,7 +70,7 @@ public:
     }
 
     // This function returns the solution from the cache
-    string getSolution (Problem p, string algorithmName) {
+    string getSolution(Problem p, string algorithmName) {
         fileLock.lock();
         ifstream file;
         string strFileName;
@@ -85,7 +85,7 @@ public:
         // Concatenate the ending of the file name
         strFileName.append(".txt");
 
-        // OPen the file that contains the solution
+        // Open the file that contains the solution
         file.open(strFileName, ios::in);
         if (file.is_open()) {
             getline(file, s);
