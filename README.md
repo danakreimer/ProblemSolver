@@ -2,6 +2,9 @@
 
 In this project we were asked to build a server which can support 10 clients in parallel. The server recieves clients and gets their problems and returns to the clients solutions in parallel. The server gets a searching problem and solves it by using the A* algorithm - giving the optimal cost to the solution.
 
+![WhatsApp Image 2020-01-30 at 12 25 07](https://user-images.githubusercontent.com/58976159/73445353-2af8e780-4363-11ea-8247-d590291932cc.jpeg)
+
+
 # Detailes
 
 Each client, after connecting to the server as mentioned above, sends a problem as a matrix with a starting point and ending point specified in the two last lines. The server directs each client to a client handler that will read the matrix, interprets it and later solves the problem. First, the client handler will check if there is already a solution to the problem stored in one of the cache files and if there is a solution - it will be sent back to the client as the answer to the problem. Otherwise, if there isn't an existing solution, our program uses the best algorithm which found the cheapest path compared to the other algorithms to solve the given searching problem. Afterwards it sends the solution's path back to the client and ends the communication. We tested four different algorithms for a variety of different searching problems. compared the resulting path costs in an empirical experiment. The chosen algorithm that solved the problems with the best results almost each time was the Astar algorithm - considering the findings we chose it from all the other options to be implemented on our project.
