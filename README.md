@@ -1,6 +1,6 @@
 # ProblemSolver using searching algorithms - C++ edition
 
-In this project we were asked to build a server which can support 10 clients in parallel. The server recieves clients and gets their problems and returns to the clients solutions in parallel. The server gets a searching problem and solves it by using the A* algorithm - giving the optimal cost to the solution.
+In this project we were asked to build a server which can support 10 clients in parallel. The server recieves clients and gets their problems and returns to the clients solutions in parallel. The server gets a searching problem and solves it by using the A* algorithm - giving the optimal cost to the solution. (https://github.com/danak1997/ProblemSolver)
 
 # The project design
 
